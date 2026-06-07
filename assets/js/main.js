@@ -68,7 +68,7 @@
         alert('Acceso denegado: actividad automatizada detectada.');
         return;
       }
-      const imgUrl = 'assets/cv-anabella.png';
+      const imgUrl = 'assets/images/cv-anabella.png';
       try {
         const response = await fetch(imgUrl, { mode: 'cors', cache: 'no-store' });
         if (!response.ok) throw new Error('CV no encontrado');
