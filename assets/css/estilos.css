@@ -1,0 +1,479 @@
+/* ========== 1. VARIABLES Y CONFIGURACIÓN ========== */
+:root {
+  /* Paleta modo claro */
+  --accent: #e84393;
+  --accent-2: #a55dff;
+  --bg: #fff9f7;
+  --bg-card: #ffffff;
+  --text: #2d2d2d;
+  --text-secondary: #5a3e3e;
+  --border: #f0e0e0;
+  --shadow: 0 8px 24px rgba(232, 67, 147, 0.08);
+  --shadow-hover: 0 16px 32px rgba(0, 0, 0, 0.12);
+  --radius: 1.2rem;
+  --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  --glass-bg: rgba(255, 249, 247, 0.85);
+}
+
+[data-theme="dark"] {
+  /* Paleta modo oscuro */
+  --accent: #3bc0fc;
+  --accent-2: #a55dff;
+  --bg: #0f0f0f;
+  --bg-card: #191919;
+  --text: #f5f5f5;
+  --text-secondary: #c0b0b0;
+  --border: #2a2a2a;
+  --shadow: 0 8px 24px rgba(59, 192, 252, 0.08);
+  --shadow-hover: 0 16px 32px rgba(0, 0, 0, 0.3);
+  --glass-bg: rgba(15, 15, 15, 0.85);
+}
+
+/* ========== 2. BASE Y TIPOGRAFÍA ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s, color 0.3s;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Animación de entrada para elementos principales */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-section,
+.custom-card,
+.timeline-item,
+.perfil-info {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Retrasos escalonados para tarjetas */
+.custom-card:nth-child(1) { animation-delay: 0.05s; }
+.custom-card:nth-child(2) { animation-delay: 0.1s; }
+.custom-card:nth-child(3) { animation-delay: 0.15s; }
+.custom-card:nth-child(4) { animation-delay: 0.2s; }
+.custom-card:nth-child(5) { animation-delay: 0.25s; }
+.custom-card:nth-child(6) { animation-delay: 0.3s; }
+
+/* ========== 3. BOTÓN DE TEMA MEJORADO ========== */
+.theme-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1050;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text);
+  font-size: 1.2rem;
+  backdrop-filter: blur(4px);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+  box-shadow: var(--shadow-hover);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* ========== 4. NAVBAR CON GLASSMORPHISM ========== */
+.navbar {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1rem;
+  transition: var(--transition);
+}
+
+[data-theme="dark"] .navbar {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.navbar-brand {
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: var(--transition);
+}
+
+.navbar-brand:hover {
+  transform: scale(1.02);
+}
+
+.nav-link {
+  font-weight: 500;
+  color: var(--text-secondary) !important;
+  margin: 0 0.25rem;
+  border-radius: 0.5rem;
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 80%;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent) !important;
+  background-color: transparent;
+}
+
+/* ========== 5. HERO MEJORADO ========== */
+.hero-section {
+  padding: 5rem 0 3rem;
+  text-align: center;
+}
+
+.hero-name {
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeInUp 0.6s ease;
+}
+
+.hero-description {
+  font-size: 1.35rem;
+  color: var(--text-secondary);
+  max-width: 650px;
+  margin: 1.5rem auto;
+}
+
+.typed-cursor {
+  font-weight: 400;
+  color: var(--accent);
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ========== 6. TARJETAS (CARDS) CON EFECTOS ========== */
+.custom-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  backdrop-filter: blur(2px);
+}
+
+.custom-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+}
+
+.custom-card .rounded-circle {
+  border: 3px solid var(--border);
+  transition: var(--transition);
+}
+
+.custom-card .rounded-circle:hover {
+  transform: scale(1.02);
+  border-color: var(--accent);
+}
+
+/* ========== 7. LÍNEA DE TIEMPO MODERNA ========== */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent-2));
+  border-radius: 3px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2.3rem;
+  top: 0.8rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 0 0 4px var(--bg-card), 0 0 0 5px var(--accent);
+  z-index: 2;
+}
+
+.timeline-dot:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 4px var(--bg-card), 0 0 0 6px var(--accent), 0 0 0 12px rgba(232, 67, 147, 0.2);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 4px var(--bg-card), 0 0 0 5px var(--accent);
+  }
+  70% {
+    box-shadow: 0 0 0 4px var(--bg-card), 0 0 0 9px var(--accent), 0 0 0 12px rgba(232, 67, 147, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 4px var(--bg-card), 0 0 0 5px var(--accent);
+  }
+}
+
+.timeline-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--accent), var(--accent-2));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.timeline-content:hover::before {
+  opacity: 1;
+}
+
+.timeline-content.highlight {
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.5);
+  transform: scale(1.01);
+}
+
+/* ========== 8. BOTONES MEJORADOS ========== */
+.btn {
+  transition: var(--transition);
+  border-radius: 0.8rem;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s, height 0.4s;
+}
+
+.btn:active::after {
+  width: 200%;
+  height: 200%;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: none;
+  padding: 0.7rem 1.8rem;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(232, 67, 147, 0.3);
+}
+
+.btn-outline-primary {
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+
+.btn-outline-primary:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-success {
+  background-color: #25D366;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #20b859;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+}
+
+/* ========== 9. FOOTER ========== */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
+
+/* ========== 10. SECCIONES ESPECIALES ========== */
+.bg-light-custom {
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+/* ========== 11. MEJORAS EN IMÁGENES ========== */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+img:not(.navbar-brand img):hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ========== 12. ACCESIBILIDAD ========== */
+a:focus-visible,
+button:focus-visible,
+.timeline-dot:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ========== 13. RESPONSIVE AVANZADO ========== */
+@media (max-width: 768px) {
+  .hero-name {
+    font-size: 2.2rem;
+  }
+  .hero-description {
+    font-size: 1.1rem;
+  }
+  .timeline {
+    padding-left: 1.5rem;
+  }
+  .timeline-dot {
+    left: -1.8rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 0.8rem;
+  }
+  .custom-card {
+    padding: 1.5rem;
+  }
+  .theme-toggle {
+    bottom: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+  .hero-section {
+    padding: 3rem 0 1.5rem;
+  }
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+  .nav-link {
+    font-size: 0.95rem;
+  }
+}
+
+/* ========== 14. UTILIDADES ADICIONALES ========== */
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.shadow-glow {
+  box-shadow: 0 0 15px rgba(232, 67, 147, 0.3);
+}
+
+.transition-smooth {
+  transition: var(--transition);
+}
